@@ -5,8 +5,7 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# SPA fallback — every route serves index.html so the client router can resolve it
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/_shell.html"
   status = 200
