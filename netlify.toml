@@ -1,15 +1,11 @@
 [build]
   command = "npm run build"
-
   publish = ".output/public"
 
 [build.environment]
-  NITRO_PRESET = "static"
   NODE_VERSION = "20"
 
-
-  publish = "dist"
-
+# SPA fallback — every route serves index.html so the client router can resolve it
 [[redirects]]
   from = "/*"
   to = "/index.html"

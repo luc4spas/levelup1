@@ -7,10 +7,13 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   tanstackStart: {
-    // SPA mode: no SSR, generates a static index.html shell that hydrates on the client.
-    // Required for static hosts like Netlify (the app uses only localStorage, no server fns).
-    spa: {
-      enabled: true,
-    },
+    // SPA mode: a single static index.html shell hydrates on the client.
+    spa: { enabled: true },
+  },
+  // Explicit Netlify preset so the build produces .output/public on Netlify.
+  // (In the Lovable sandbox the plugin forces Cloudflare regardless; local
+  // builds may differ, but Netlify's build environment honors this.)
+  nitro: {
+    preset: "netlify",
   },
 });
