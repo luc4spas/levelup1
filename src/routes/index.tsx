@@ -145,7 +145,9 @@ function Landing() {
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-4">
           {(["01","02","03","04"] as const).map((l) => {
             const isCurrent = l === current;
-            const past = new Date() > new Date(LOTES[l].deadline);
+            const [y, m, d] = LOTES[l].deadline.split("-");
+            const deadlineLabel = `${d}/${m}/${y}`;
+            const past = new Date() > new Date(`${LOTES[l].deadline}T23:59:59`);
             return (
               <div key={l} className={`relative overflow-hidden rounded-3xl border p-6 transition ${isCurrent ? "border-foreground bg-foreground text-background" : "border-border bg-card"} ${past ? "opacity-50" : ""}`}>
                 {isCurrent && (
@@ -154,7 +156,7 @@ function Landing() {
                 <div className="text-xs font-bold uppercase tracking-widest opacity-70">Lote</div>
                 <div className={`font-display text-6xl font-black leading-none ${isCurrent ? "text-neon" : ""}`}>{l}</div>
                 <div className="mt-4 text-3xl font-black">R$ {LOTES[l].price},00</div>
-                <div className="mt-1 text-sm opacity-70">Inscrição até {new Date(LOTES[l].deadline).toLocaleDateString("pt-BR")}</div>
+                <div className="mt-1 text-sm opacity-70">Inscrição até {deadlineLabel}</div>
                 {isCurrent ? (
                   <Link to="/inscricao" className="btn-neon hover:btn-neon-hover mt-5 inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-bold transition">
                     Inscrever-se agora

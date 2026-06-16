@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = ".output/public"
+
+[build.environment]
+  NITRO_PRESET = "static"
+  NODE_VERSION = "20"
+
+# SPA fallback — todas as rotas servem o index.html para o roteador client-side resolver
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
